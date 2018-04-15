@@ -8,11 +8,15 @@ public class Card implements Comparable<Card>{
     private int priority;
     private int count;
 
-    public Card (String question, String answer) {
+    public Card (String question, String answer, int priority, int count) {
         this.question = question;
         this.answer = answer;
         this.priority = 1;
         this.count = 0;
+    }
+
+    public Card (String question, String answer) {
+        this(question, answer, 1, 0);
     }
 
 

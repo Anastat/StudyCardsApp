@@ -12,8 +12,8 @@ public class Deck {
         this.cards = new LinkedList<>();
     }
 
-    public void addCard (String question, String answer) {
-        cards.add(new Card(question, answer));
+    public void addCard (String question, String answer, int priority, int count) {
+        cards.add(new Card(question, answer, priority, count));
     }
 
     public void deleteCard (Card card) {
