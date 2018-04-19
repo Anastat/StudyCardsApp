@@ -49,4 +49,5 @@
         app:layout_constraintVertical_bias="0.947"
         app:rippleColor="?android:attr/fastScrollTextColor"
         app:srcCompat="@android:drawable/ic_menu_add" />
+
 </android.support.constraint.ConstraintLayout>

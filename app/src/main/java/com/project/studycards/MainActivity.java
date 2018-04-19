@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
     private String deckName;
     private UserDecks userDecks;
 
-    private View.OnClickListener addNewDeckOnClickistener = new View.OnClickListener() {
+    private View.OnClickListener addNewDeckOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             addNewDeckBtnClicked();
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
         setContentView(R.layout.activity_main);
         mainTableLayout = (TableLayout) findViewById(R.id.mainTableLayout);
         btnAddNewDeck = (FloatingActionButton) findViewById(R.id.btnAddNewDeck);
-        btnAddNewDeck.setOnClickListener(addNewDeckOnClickistener);
+        btnAddNewDeck.setOnClickListener(addNewDeckOnClickListener);
         final AssetManager assetManager = getAssets();
         this.userDecks = new UserDecks();
         createDecksButtons(userDecks.readDecksFromFiles(assetManager));//take file list from assets/deck folder and create buttons with deck name on main screen
