@@ -12,11 +12,18 @@ public class Deck {
         this.cards = new LinkedList<>();
     }
 
-    public void addCard (String question, String answer, int priority, int count) {
-        cards.add(new Card(question, answer, priority, count));
+    public void addCard (Card card) {
+        cards.add(card);
     }
 
     public void deleteCard (Card card) {
         cards.remove(card);
+    }
+
+    public String toString () {
+        StringBuilder str = new StringBuilder();
+        for (Card card : cards)
+            str.append(card + "\n");
+        return str.toString();
     }
 }

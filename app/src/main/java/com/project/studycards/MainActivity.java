@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
 
     //create buttons with existing decks  on main screen
     private void createDecksButtons (String [] filelist) {
-        if (filelist.length>0) {
+        if (filelist != null) {
             for (String filename : filelist)
                 createBtn(filename.replaceFirst("[.][^.]+$", ""));
         }

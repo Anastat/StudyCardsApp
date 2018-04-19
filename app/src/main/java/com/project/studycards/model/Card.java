@@ -11,12 +11,16 @@ public class Card implements Comparable<Card>{
     public Card (String question, String answer, int priority, int count) {
         this.question = question;
         this.answer = answer;
-        this.priority = 1;
-        this.count = 0;
+        this.priority = priority;
+        this.count = count;
     }
 
     public Card (String question, String answer) {
         this(question, answer, 1, 0);
+    }
+
+    public Card () {
+        //this constructor needs for reading from file (SuperCSV doesn't works without empty constructor)
     }
 
 
@@ -43,5 +47,25 @@ public class Card implements Comparable<Card>{
 
     public int getCount() {
         return count;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String toString () {
+        return "Question: " + this.question + " Answer: " + this.answer;
     }
 }
