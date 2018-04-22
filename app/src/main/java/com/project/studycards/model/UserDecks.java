@@ -23,7 +23,7 @@ public class UserDecks {
     }
 
     //get list of files from deck folder
-    public String [] readDecksFromFiles (AssetManager assetManager) {
+    public void readDecksFromFiles (AssetManager assetManager) {
         this.assetManager = assetManager;
         try {
             // for assets folder add empty string
@@ -34,14 +34,16 @@ public class UserDecks {
                 for (int i=0; i<filelist.length; i++) {
                     // Get filename of file or directory
                     String filename = filelist[i];
-                    fromFileToList("decks/" + filename);
+                    fromFileToList( filename);
                 }
             }
-            return filelist;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+}
+
+    public List<Deck> getDecks() {
+        return decks;
     }
 
     //save deck from file to List
@@ -51,7 +53,7 @@ public class UserDecks {
         decks.add(newDeck);
 
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(assetManager.open(filename));
+            InputStreamReader inputStreamReader = new InputStreamReader(assetManager.open("decks/" + filename));
             ICsvBeanReader csvBeanReader = new CsvBeanReader(inputStreamReader, CsvPreference.STANDARD_PREFERENCE);
             String [] mapping = new String[]{"question", "answer", "priority", "count"};
             final CellProcessor[] processors = new CellProcessor[]{new NotNull(),new NotNull(), new ParseInt(), new ParseInt()};
@@ -65,5 +67,9 @@ public class UserDecks {
         }
 
         Log.i(filename, newDeck.toString());
+    }
+
+    public void add(Deck newDeck) {
+        this.decks.add(newDeck);
     }
 }

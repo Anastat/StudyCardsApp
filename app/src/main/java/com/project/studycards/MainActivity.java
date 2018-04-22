@@ -1,24 +1,26 @@
 package com.project.studycards;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
+
+import com.project.studycards.model.Deck;
 import com.project.studycards.model.DeckNameDialogFragment;
 import com.project.studycards.model.UserDecks;
-
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements DeckNameDialogFragment.DeckNameDialogListener{
 
     private FloatingActionButton btnAddNewDeck;
     private TableLayout mainTableLayout;
-    private String deckName;
+    private Deck currentDeck;
     private UserDecks userDecks;
 
     private View.OnClickListener addNewDeckOnClickListener = new View.OnClickListener() {
@@ -27,14 +29,6 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
             addNewDeckBtnClicked();
         }
     };
-
-    private View.OnClickListener openDeckModes = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            openDeckMenu();
-        }
-    };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,48 +39,57 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
         btnAddNewDeck.setOnClickListener(addNewDeckOnClickListener);
         final AssetManager assetManager = getAssets();
         this.userDecks = new UserDecks();
-        createDecksButtons(userDecks.readDecksFromFiles(assetManager));//take file list from assets/deck folder and create buttons with deck name on main screen
+        userDecks.readDecksFromFiles(assetManager); //Fill UserDecks list with decks from files
+        createDecksButtons();//take list of decks from UserDecks and create buttons with deck name on main screen
     }
 
 
     //show dialog for typing deck name
     private void addNewDeckBtnClicked() {
-        this.deckName = "";
-
         DialogFragment deckNameDialog = new DeckNameDialogFragment();
         deckNameDialog.show(getFragmentManager(), "missiles");
-    }
-
-    //open new screen with deck modes
-    private void openDeckMenu () {
-        Intent intent = new Intent(this, DeckModes.class);
-        startActivity(intent);
     }
 
     //create new button on main screen with deck name
     @Override
     public void applyDeckname(String deckName) {
-        this.deckName = deckName;
         if (!deckName.isEmpty()) {
-            createBtn(deckName);
-            //Deck newDeck = new Deck("New deck");
+            Deck newDeck = new Deck(deckName);
+            userDecks.add(newDeck);
+            createBtn(newDeck);
         }
     }
 
     //create buttons with existing decks  on main screen
-    private void createDecksButtons (String [] filelist) {
-        if (filelist != null) {
-            for (String filename : filelist)
-                createBtn(filename.replaceFirst("[.][^.]+$", ""));
+    private void createDecksButtons () {
+        if (userDecks != null) {
+            for (Deck deck : userDecks.getDecks())
+                createBtn(deck);
         }
     }
 
     //create new button with deck name
-    private void createBtn (String name) {
+    private void createBtn (Deck deck) {
         Button btnNew = new Button(this);
-        btnNew.setText(name);
-        btnNew.setOnClickListener(openDeckModes);
+        btnNew.setText(deck.getName());
+        btnNew.setOnClickListener(new DeckClickListener(deck));
         mainTableLayout.addView(btnNew);
     }
 
+    //OnClickListener for starting new activity with given deck
+    public class DeckClickListener implements View.OnClickListener {
+        private Deck deck;
+
+        public DeckClickListener (Deck deck) {
+            this.deck = deck;
+        }
+
+        public void onClick(View view) {
+            //open new screen with deck modes
+            Log.w("Deck ", deck.getName());
+            Intent intent = new Intent(MainActivity.this, DeckModes.class);
+            intent.putExtra("deck", deck);//send clicked deck to DeckModes Activity
+            startActivity(intent);
+        }
+    }
 }

@@ -2,7 +2,9 @@ package com.project.studycards.model;
 
 import android.support.annotation.NonNull;
 
-public class Card implements Comparable<Card>{
+import java.io.Serializable;
+
+public class Card implements Comparable<Card>, Serializable{
     private String question;
     private String answer;
     private int priority;
