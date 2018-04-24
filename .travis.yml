@@ -28,6 +28,11 @@ android:
     # Support library
     - extra-android-support
     - extra-android-m2repository
+    
+    licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 
 before_install: chmod +x gradlew
 #Skip install step
