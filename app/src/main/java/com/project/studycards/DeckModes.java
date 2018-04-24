@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Button;
 
 import com.project.studycards.model.Deck;
@@ -38,7 +39,8 @@ public class DeckModes extends AppCompatActivity {
         Log.w("You clicked deck", currentDeck.getName());
 
         ViewPager pager=(ViewPager)findViewById(R.id.pager);
-        //pager.setAdapter(new MyAdapter(getSupportFragmentManager()));
+        //pager.setAdapter(new Adapter(getSupportFragmentManager()));
+
 
     }
 
