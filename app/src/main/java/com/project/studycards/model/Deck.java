@@ -11,6 +11,10 @@ public class Deck implements Parcelable {
     private String name;
     private List<Card> cards;
 
+    public List<Card> getCards() {
+        return cards;
+    }
+
     public Deck (String name) {
         this.name = name;
         this.cards = new LinkedList<>();

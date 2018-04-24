@@ -25,6 +25,11 @@ proguard/
 
 # Log Files
 *.log
+logs/
+
+#Webapp runner (Tomcat) build files
+target/
+
 
 # Android Studio Navigation editor temp files
 .navigation/
