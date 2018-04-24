@@ -25,6 +25,10 @@ android:
     - sys-img-armeabi-v7a-android-27
     - sys-img-armeabi-v7a-android-15
 
+before_install: chmod +x gradlew
+#Skip install step
+install: true
+
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -34,5 +38,3 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
     
-
-script: ./gradlew connectedAndroidTest
