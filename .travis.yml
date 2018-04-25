@@ -10,8 +10,8 @@ android:
 
     # The BuildTools version used by your project
     - build-tools-$ANDROID_BUILD_TOOLS
-  - android-$ANDROID_API
-  - android-$EMULATOR_API
+    - android-$ANDROID_API
+    - android-$EMULATOR_API
 
     # The SDK version used to compile your project
     - android-27
@@ -25,7 +25,7 @@ android:
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
     - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API
-  - sys-img-armeabi-v7a-android-$EMULATOR_API
+    - sys-img-armeabi-v7a-android-$EMULATOR_API
     
     # Support library
     - extra-android-support
@@ -36,9 +36,6 @@ before_install:
     - yes | sdkmanager "platforms;android-27"
     - chmod +x gradlew
   
-#Skip install step
-install: true
-
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
