@@ -1,44 +1,28 @@
 package com.project.studycards.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.project.studycards.R;
+public class LearningModeFragment extends DefaultFragment {
 
-public class LearningModeFragment extends Fragment {
 
-    private int pageNumber;
+    private static final String LOG_TAG = LearningModeFragment.class.getSimpleName();
 
-    public static LearningModeFragment newInstance(int n, String question, String answer) {
-        LearningModeFragment fragment = new LearningModeFragment();
-        Bundle args=new Bundle();
-        args.putInt("num", n);
-        args.putString("question", question);
-        args.putString("answer", answer);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private ViewPager viewPager;
+    private FragmentPagerAdapter fragmentPagerAdapter;
+    //private List<>
 
-    public LearningModeFragment () {
-
-}
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        pageNumber = getArguments() != null ? getArguments().getInt("num") : 1;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return null;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View result=inflater.inflate(R.layout.learning_mode_layout, container, false);
-        TextView pageHeader=(TextView)result.findViewById(R.id.viewQuestion);
-        String header = String.format("Page %d", pageNumber+1);
-        pageHeader.setText(header);
-        return result;
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
     }
 }

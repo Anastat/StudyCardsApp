@@ -2,22 +2,20 @@ package com.project.studycards;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 
 import com.project.studycards.model.Deck;
-import com.project.studycards.fragments.LearningModeFragment;
 
 public class DeckModes extends AppCompatActivity {
 
     private FloatingActionButton btnAddNewCard;
     private Button btnLearningMode;
     private Deck currentDeck;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +34,7 @@ public class DeckModes extends AppCompatActivity {
         //set clicked deck from MainActivity to current deck
         Intent intent = getIntent();
         currentDeck = (Deck) intent.getParcelableExtra("deck");
-        Log.w("You clicked deck", currentDeck.getName());
-
-        ViewPager pager=(ViewPager)findViewById(R.id.pager);
-        //pager.setAdapter(new Adapter(getSupportFragmentManager()));
-
+        Log.w("You clicked deck", currentDeck.toString());
 
     }
 
@@ -64,7 +58,8 @@ public class DeckModes extends AppCompatActivity {
     }
 
     private void startLearningMode () {
-        Intent intent = new Intent (this, LearningModeFragment.class);
+        Intent intent = new Intent (this, LearningModeActivity.class);
+        intent.putExtra("currentDeck", currentDeck);
         startActivity(intent);
     }
 }
