@@ -1,5 +1,6 @@
 package com.project.studycards;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -8,9 +9,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.project.studycards.fragments.AddCardDialogFragment;
+import com.project.studycards.fragments.DeckNameDialogFragment;
 import com.project.studycards.model.Deck;
+import com.project.studycards.model.Card;
 
-public class DeckModes extends AppCompatActivity {
+public class DeckModes extends AppCompatActivity implements AddCardDialogFragment.AddCardDialogListener{
 
     private FloatingActionButton btnAddNewCard;
     private Button btnLearningMode;
@@ -24,7 +28,7 @@ public class DeckModes extends AppCompatActivity {
 
         //button for adding new card in deck
         btnAddNewCard = (FloatingActionButton) findViewById(R.id.btnAddNewCard);
-        btnAddNewCard.setOnClickListener(openAddCard);
+        btnAddNewCard.setOnClickListener(addNewCard);
 
         //button for start learnin mode
         btnLearningMode = (Button) findViewById(R.id.btnLearningMode);
@@ -38,13 +42,6 @@ public class DeckModes extends AppCompatActivity {
 
     }
 
-    private View.OnClickListener openAddCard = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            openAddCardView();
-        }
-    };
-
     private View.OnClickListener startLearningMode = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -52,14 +49,28 @@ public class DeckModes extends AppCompatActivity {
         }
     };
 
-    private void openAddCardView() {
-        Intent intent = new Intent(this, AddCard.class);
-        startActivity(intent);
-    }
-
     private void startLearningMode () {
         Intent intent = new Intent (this, LearningModeActivity.class);
         intent.putExtra("currentDeck", currentDeck);
         startActivity(intent);
+    }
+
+    private View.OnClickListener addNewCard = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            addNewCardBtnClicked();
+        }
+    };
+    //show dialog for adding a new card
+    private void addNewCardBtnClicked() {
+        DialogFragment addCardDialog = new AddCardDialogFragment();
+        addCardDialog.show(getFragmentManager(), "add card");
+    }
+
+    public void addCard(String question, String answer) {
+        if (!question.isEmpty() && !answer.isEmpty()) {
+            Card newCard = new Card(question, answer);
+            currentDeck.addCard(newCard);
+        }
     }
 }
