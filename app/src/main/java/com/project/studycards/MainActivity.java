@@ -1,6 +1,5 @@
 package com.project.studycards;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -13,7 +12,7 @@ import android.widget.Button;
 import android.widget.TableLayout;
 
 import com.project.studycards.model.Deck;
-import com.project.studycards.model.DeckNameDialogFragment;
+import com.project.studycards.fragments.DeckNameDialogFragment;
 import com.project.studycards.model.UserDecks;
 
 public class MainActivity extends AppCompatActivity implements DeckNameDialogFragment.DeckNameDialogListener{

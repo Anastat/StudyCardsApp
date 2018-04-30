@@ -1,4 +1,4 @@
-package com.project.studycards.model;
+package com.project.studycards.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -6,10 +6,8 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.widget.EditText;
 
-import com.project.studycards.MainActivity;
 import com.project.studycards.R;
 //dialog screen for typing deckname
 public class DeckNameDialogFragment extends DialogFragment {

@@ -27,5 +27,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:design:27.1.0'
     implementation 'com.android.support:gridlayout-v7:27.1.0'
-    compile 'net.sf.supercsv:super-csv:2.4.0'
+    implementation 'net.sf.supercsv:super-csv:2.4.0'
 }
