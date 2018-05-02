@@ -26,7 +26,7 @@ public class DeckModes extends AppCompatActivity {
         btnAddNewCard = (FloatingActionButton) findViewById(R.id.btnAddNewCard);
         btnAddNewCard.setOnClickListener(openAddCard);
 
-        //button for start learnin mode
+        //button for start learning mode
         btnLearningMode = (Button) findViewById(R.id.btnLearningMode);
         btnLearningMode.setOnClickListener(startLearningMode);
 
