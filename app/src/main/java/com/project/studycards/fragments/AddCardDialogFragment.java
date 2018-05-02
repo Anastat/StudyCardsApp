@@ -5,11 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -30,18 +26,18 @@ public class AddCardDialogFragment extends DialogFragment {
 
         final EditText question = new EditText(getActivity());
         question.setHint("Question");
-        layout.addView(question); // Notice this is an add method
+        layout.addView(question);
 
         final EditText answer = new EditText(getActivity());
         answer.setHint("Answer");
-        layout.addView(answer); // Another add method
+        layout.addView(answer);
         
         builder.setMessage("Add card")
                 .setView(layout)
                 // Add action buttons
                 .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // save deck name
+                        //Add card
                         listener.addCard(question.getText().toString(), answer.getText().toString());
 
                     }
