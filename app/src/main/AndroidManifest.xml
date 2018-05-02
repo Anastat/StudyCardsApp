@@ -17,11 +17,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".DeckModes" />
+
         <activity
             android:name=".AddCard"
             android:parentActivityName=".DeckModes" />
         <activity android:name=".LearningModeActivity" />
         <activity android:name=".TestModeActivity"></activity>
+
+        <activity android:name=".LearningModeActivity"></activity>
+
     </application>
 
 </manifest>
