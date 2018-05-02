@@ -61,10 +61,6 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
         }
     };
 
-    private void openAddCardView() {
-        Intent intent = new Intent(this, AddCard.class);
-        startActivity(intent);
-    }
 
 
     private void startLearningMode () {
@@ -75,10 +71,10 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
 
 
     private void startTestMode() {
-        Intent intent = new Intent (this, TestModeActivity.class);
+        Intent intent = new Intent(this, TestModeActivity.class);
         intent.putExtra("currentDeck", currentDeck);
         startActivity(intent);
-
+    }
     private View.OnClickListener addNewCard = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
