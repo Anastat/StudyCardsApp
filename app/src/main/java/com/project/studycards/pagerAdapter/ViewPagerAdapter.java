@@ -17,7 +17,7 @@ import com.project.studycards.model.Card;
 import com.project.studycards.model.Deck;
 
 import java.util.List;
-
+//Adapter for learning mode activity
 public class ViewPagerAdapter extends PagerAdapter {
     Context context;
     private Deck deckCards;

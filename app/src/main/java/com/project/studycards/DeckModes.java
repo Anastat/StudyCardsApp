@@ -14,6 +14,7 @@ public class DeckModes extends AppCompatActivity {
 
     private FloatingActionButton btnAddNewCard;
     private Button btnLearningMode;
+    private Button btnTestMode;
     private Deck currentDeck;
 
 
@@ -30,6 +31,9 @@ public class DeckModes extends AppCompatActivity {
         btnLearningMode = (Button) findViewById(R.id.btnLearningMode);
         btnLearningMode.setOnClickListener(startLearningMode);
 
+        //button for start test mode
+        btnTestMode = (Button) findViewById(R.id.btnTestMode);
+        btnTestMode.setOnClickListener(startTestMode);
 
         //set clicked deck from MainActivity to current deck
         Intent intent = getIntent();
@@ -52,6 +56,13 @@ public class DeckModes extends AppCompatActivity {
         }
     };
 
+    private View.OnClickListener startTestMode = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startTestMode();
+        }
+    };
+
     private void openAddCardView() {
         Intent intent = new Intent(this, AddCard.class);
         startActivity(intent);
@@ -59,6 +70,12 @@ public class DeckModes extends AppCompatActivity {
 
     private void startLearningMode () {
         Intent intent = new Intent (this, LearningModeActivity.class);
+        intent.putExtra("currentDeck", currentDeck);
+        startActivity(intent);
+    }
+
+    private void startTestMode() {
+        Intent intent = new Intent (this, TestModeActivity.class);
         intent.putExtra("currentDeck", currentDeck);
         startActivity(intent);
     }

@@ -20,7 +20,8 @@
         <activity
             android:name=".AddCard"
             android:parentActivityName=".DeckModes" />
-        <activity android:name=".LearningModeActivity"></activity>
+        <activity android:name=".LearningModeActivity" />
+        <activity android:name=".TestModeActivity"></activity>
     </application>
 
 </manifest>

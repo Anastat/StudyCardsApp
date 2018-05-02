@@ -41,8 +41,8 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnAddNewCard"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
