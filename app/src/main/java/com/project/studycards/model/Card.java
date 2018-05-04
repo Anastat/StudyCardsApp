@@ -67,6 +67,8 @@ public class Card implements Comparable<Card>, Serializable{
         this.count = count;
     }
 
+    public void incrementCount () { count++;}
+
     public String toString () {
         return "Question: " + this.question + " Answer: " + this.answer;
     }

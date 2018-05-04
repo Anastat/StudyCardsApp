@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.project.studycards.model.Deck;
-import com.project.studycards.pagerAdapter.ViewPagerAdapter;
+import com.project.studycards.adapters.ViewPagerAdapter;
 
 public class LearningModeActivity extends AppCompatActivity {
 
