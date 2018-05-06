@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.project.studycards.model.Deck;
-import com.project.studycards.pagerAdapter.ViewPagerAdapter;
+import com.project.studycards.adapters.ViewPagerAdapter;
+
+import java.util.Collections;
 
 public class LearningModeActivity extends AppCompatActivity {
 
@@ -20,8 +22,8 @@ public class LearningModeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragmentviewer_layout);
         Intent intent = getIntent();
-        deck = (Deck) intent.getParcelableExtra("currentDeck");
-
+        deck = (Deck) intent.getParcelableExtra(MainActivity.key);
+        Collections.sort(deck.getCards());
 
         viewPager = (ViewPager)findViewById(R.id.pager);
         //pass results to ViewPagerAdapter Class

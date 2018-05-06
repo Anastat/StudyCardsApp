@@ -6,10 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <TextView
         android:id="@+id/testQuestion"
         android:layout_width="343dp"
-        android:layout_height="248dp"
+        android:layout_height="247dp"
         android:layout_gravity="top"
         android:layout_margin="15dp"
         android:layout_marginEnd="8dp"
@@ -27,13 +28,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_gravity="center"
-        android:background="@color/colorPrimaryDark" />
-
+    <TextView
+        android:id="@+id/viewTestAnswer"
+        android:layout_width="341dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/border_style"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnShowAnswer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/testQuestion"
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout4"
@@ -51,6 +69,7 @@
         android:text="TextView"
         android:textColor="#000000"
         android:textSize="20dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,55 +80,66 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="Type your answer" />
+            android:hint="Type your answer"
+            android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/showAnswerButton"
+        android:id="@+id/btnShowAnswer"
         android:layout_width="132dp"
         android:layout_height="wrap_content"
 
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginRight="56dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPrimary"
-        android:text="Show answer"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnNextCard"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnNextCard"
-        android:layout_width="108dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:clickable="true"
-        android:rotation="180"
-        app:backgroundTint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="?attr/homeAsUpIndicator" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnPrevCard"
-        android:layout_width="108dp"
-        android:layout_height="47dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:clickable="true"
-        app:backgroundTint="@color/colorPrimary"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
+        android:text="Show answer"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/showAnswerButton"
-        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="?attr/homeAsUpIndicator" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnNextCard"
+        android:layout_width="132dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
+        android:text="Next card"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/cardStat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.039" />
 
 </android.support.constraint.ConstraintLayout>
