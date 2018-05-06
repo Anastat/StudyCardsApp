@@ -15,6 +15,8 @@ import com.project.studycards.model.Deck;
 import com.project.studycards.fragments.DeckNameDialogFragment;
 import com.project.studycards.model.UserDecks;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity implements DeckNameDialogFragment.DeckNameDialogListener{
 
     private FloatingActionButton btnAddNewDeck;
@@ -35,14 +37,36 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
         setContentView(R.layout.activity_main);
         mainTableLayout = (TableLayout) findViewById(R.id.mainTableLayout);
         btnAddNewDeck = (FloatingActionButton) findViewById(R.id.btnAddNewDeck);
+        addDecksDir();
         btnAddNewDeck.setOnClickListener(addNewDeckOnClickListener);
         final AssetManager assetManager = getAssets();
         this.userDecks = new UserDecks();
-        userDecks.readDecksFromFiles(assetManager); //Fill UserDecks list with decks from files
+        userDecks.readDecksFromFiles(assetManager, this.getApplicationContext()); //Fill UserDecks list with decks from files
         createDecksButtons();//take list of decks from UserDecks and create buttons with deck name on main screen
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        userDecks.writeDecksToFiles(this.getApplicationContext());
 
+    }
+    
+    private void addDecksDir() {
+        File decksDir = new File(this.getApplicationContext().getFilesDir()+"/decks");
+
+        if(!decksDir.exists() && !decksDir.isDirectory()) {
+            // create empty directory
+            if (decksDir.mkdirs()) {
+                Log.i("CreateDir","Decks dir created");
+            }
+            else {
+                Log.w("CreateDir","Unable to create decks dir!");
+            }
+        } else {
+            Log.i("CreateDir","Decks dir already exists");
+        }
+    }
     //show dialog for typing deck name
     private void addNewDeckBtnClicked() {
         DialogFragment deckNameDialog = new DeckNameDialogFragment();
