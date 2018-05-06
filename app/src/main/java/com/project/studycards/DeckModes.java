@@ -1,6 +1,8 @@
 package com.project.studycards;
 
+import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +43,7 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
 
         //set clicked deck from MainActivity to current deck
         Intent intent = getIntent();
-        currentDeck = (Deck) intent.getParcelableExtra("deck");
+        currentDeck = (Deck) intent.getParcelableExtra(MainActivity.key);
         Log.w("You clicked deck", currentDeck.toString());
 
     }
@@ -49,7 +51,9 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
     private View.OnClickListener startLearningMode = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startLearningMode();
+            if (!currentDeck.getCards().isEmpty())
+                startLearningMode();
+            else alertView("The deck is empty!");
         }
     };
 
@@ -57,7 +61,9 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
     private View.OnClickListener startTestMode = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startTestMode();
+            if (!currentDeck.getCards().isEmpty())
+                startTestMode();
+            else alertView("There are no cards in the deck!");
         }
     };
 
@@ -65,15 +71,15 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
 
     private void startLearningMode () {
         Intent intent = new Intent (this, LearningModeActivity.class);
-        intent.putExtra("currentDeck", currentDeck);
+        intent.putExtra(MainActivity.key, currentDeck);
         startActivity(intent);
     }
 
 
     private void startTestMode() {
         Intent intent = new Intent(this, TestModeActivity.class);
-        intent.putExtra("currentDeck", currentDeck);
-        startActivity(intent);
+        intent.putExtra(MainActivity.key, currentDeck);
+        startActivityForResult(intent, 1);
     }
     private View.OnClickListener addNewCard = new View.OnClickListener() {
         @Override
@@ -93,5 +99,22 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
             currentDeck.addCard(newCard);
         }
 
+    }
+
+    private void alertView( String message ) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+        dialog.setTitle( message )
+                //.setMessage()
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+                    }
+                }).show();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            this.currentDeck = (Deck) data.getParcelableExtra(MainActivity.key);
+        }
     }
 }

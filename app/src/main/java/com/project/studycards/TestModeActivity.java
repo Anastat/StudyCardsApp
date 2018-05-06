@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.project.studycards.model.Deck;
+import java.util.Collections;
 
 public class TestModeActivity extends AppCompatActivity {
 
@@ -26,6 +26,8 @@ public class TestModeActivity extends AppCompatActivity {
     private TextInputLayout textInputLayout4;
     private String userAnswer;
     private int currentCard;
+    private int guessedCards;
+    private boolean end;
 
 
     @Override
@@ -34,6 +36,8 @@ public class TestModeActivity extends AppCompatActivity {
         setContentView(R.layout.test_deck_layout);
 
         currentCard = 0;
+        guessedCards = 0;
+        end = false;
         testQuestion = (TextView) findViewById(R.id.testQuestion);
         viewTestAnswer = (TextView) findViewById(R.id.viewTestAnswer);
         cardStat = (TextView) findViewById(R.id.cardStat);
@@ -41,6 +45,11 @@ public class TestModeActivity extends AppCompatActivity {
         btnShowAnswer = (Button) findViewById(R.id.btnShowAnswer);
         btnNextCard = (Button) findViewById(R.id.btnNextCard);
         textInputLayout4 = (TextInputLayout) findViewById(R.id.textInputLayout4);
+
+        Intent intent = getIntent();
+        deck = (Deck) intent.getParcelableExtra(MainActivity.key);
+        Collections.sort(deck.getCards()); //Sort cards by priority
+        updateQuestion(currentCard);
 
         //set listener for 'show answer' and 'next card' buttons
         btnShowAnswer.setOnClickListener(showAnswer);
@@ -51,13 +60,16 @@ public class TestModeActivity extends AppCompatActivity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     userAnswer = testAnswer.getText().toString();
-                    if (userAnswer.equals(deck.getCards().get(currentCard).getAnswer())) {
+                    if (userAnswer.toLowerCase().equals(deck.getCards().get(currentCard).getAnswer().toLowerCase())) {
                         //if the answer is correct increment right answers count
                         deck.getCards().get(currentCard).incrementCount();
-                        currentCard++;
-                        alertView("Right answer!");
+                        guessedCards++;
+                        setCardPriority(5);
+                        alertView("Right answer!", "");
+                        isNextCard();
                     } else {
-                        alertView("Wrong answer!");
+                        setCardPriority(1);
+                        alertView("Wrong answer!", "");
                         showRightAnswer();
                     }
                     return true;
@@ -65,12 +77,6 @@ public class TestModeActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        Intent intent = getIntent();
-        deck = (Deck) intent.getParcelableExtra("currentDeck");
-
-        updateQuestion(currentCard);
-
     }
 
     //if answer is wrong or pressed button 'show answer'
@@ -98,7 +104,7 @@ public class TestModeActivity extends AppCompatActivity {
             viewTestAnswer.setVisibility(View.GONE);
             btnShowAnswer.setVisibility(View.VISIBLE);
             btnNextCard.setVisibility(View.GONE);
-            updateQuestion(++currentCard);
+            isNextCard();
         }
     };
     //show current card question
@@ -107,16 +113,54 @@ public class TestModeActivity extends AppCompatActivity {
         cardStat.setText("This card guessed " + deck.getCards().get(cardNum).getCount() + " times");
     }
 
-    private void alertView( String message ) {
+    private void alertView( String title, String message ) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
-        dialog.setTitle( message )
-                //.setMessage()
+        dialog.setTitle( title )
+                .setMessage(message)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
-                        updateQuestion(currentCard);
-                        testAnswer.setText("");
+                        if (end)
+                            endSession();
+                        else {
+                            updateQuestion(currentCard);
+                            testAnswer.setText("");
+                        }
                     }
                 }).show();
+    }
+
+    //show next card if exist
+    private void isNextCard() {
+        if (++currentCard<deck.getCards().size() && currentCard<10) {
+            updateQuestion(currentCard);
+        } else {
+            end = true;
+            showResult();
+        }
+    }
+
+    //show how much cards guessed and finnish session
+    private void showResult () {
+        String message = "You guessed " + guessedCards + "/" + currentCard;
+        if (currentCard-guessedCards <= 2)
+            alertView("Well done!", message);
+        else if (currentCard-guessedCards <= 4)
+            alertView("Good job", message);
+        else
+            alertView("You can do better", message);
+    }
+
+    //change card priority if card new priority 0, if card guessed +5, else +1
+    private void setCardPriority (int num) {
+        int cardPriority = deck.getCards().get(currentCard).getPriority();
+        deck.getCards().get(currentCard).setPriority(cardPriority+num);
+    }
+
+    private void endSession() {
+        Intent intent = new Intent();
+        intent.putExtra(MainActivity.key, deck);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }
