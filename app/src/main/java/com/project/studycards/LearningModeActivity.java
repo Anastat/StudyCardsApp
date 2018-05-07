@@ -5,6 +5,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 
 import com.project.studycards.model.Deck;
 import com.project.studycards.adapters.ViewPagerAdapter;
@@ -16,6 +17,13 @@ public class LearningModeActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private PagerAdapter adapter;
     private Deck deck;
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_learningmodeactivity, menu);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
