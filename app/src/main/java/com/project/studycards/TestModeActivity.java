@@ -50,7 +50,7 @@ public class TestModeActivity extends AppCompatActivity {
         deck = (Deck) intent.getParcelableExtra(MainActivity.key);
         Collections.sort(deck.getCards()); //Sort cards by priority
         updateQuestion(currentCard);
-
+        setTitle(deck.getName());
         //set listener for 'show answer' and 'next card' buttons
         btnShowAnswer.setOnClickListener(showAnswer);
         btnNextCard.setOnClickListener(nextCard);

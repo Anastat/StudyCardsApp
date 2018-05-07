@@ -55,7 +55,7 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
         Intent intent = getIntent();
         currentDeck = (Deck) intent.getParcelableExtra(MainActivity.key);
         Log.w("You clicked deck", currentDeck.toString());
-
+        setTitle(currentDeck.getName());
     }
 
     private View.OnClickListener startLearningMode = new View.OnClickListener() {
