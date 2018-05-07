@@ -1,5 +1,6 @@
 package com.project.studycards.model;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
 import org.supercsv.cellprocessor.ParseInt;
@@ -11,6 +12,7 @@ import org.supercsv.io.ICsvBeanReader;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,23 +23,37 @@ public class UserDecks {
 
     private List<Deck> decks;
     private AssetManager assetManager;
+    private Context context;
 
     public UserDecks () {
         this.decks = new ArrayList<>();
     }
 
     //get list of files from deck folder
-    public void readDecksFromFiles (AssetManager assetManager) {
+    public void readDecksFromFiles (AssetManager assetManager, Context context) {
         this.assetManager = assetManager;
+        this.context = context;
+
         try {
             // for assets folder add empty string
             String[] filelist = assetManager.list("decks");
+            // get users own files
+            File decksDir = new File(context.getFilesDir()+"/decks");
+            String[] userfiles = decksDir.list();
             if (filelist == null) {
                 // dir does not exist or is not a directory
             } else {
                 for (int i=0; i<filelist.length; i++) {
                     // Get filename of file or directory
                     String filename = filelist[i];
+                    fromFileToList( filename);
+                }
+            }
+
+            if (userfiles != null) {
+                for (int i=0; i<userfiles.length; i++) {
+                    // Get filename of file or directory
+                    String filename = userfiles[i];
                     fromFileToList( filename);
                 }
             }
@@ -48,6 +64,15 @@ public class UserDecks {
 
     public List<Deck> getDecks() {
         return decks;
+    }
+
+    public boolean uniqueName(String deckName) {
+        for (Deck deck : decks) {
+            if (deck.getName().equals(deckName)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     //save deck from file to List
@@ -73,13 +98,47 @@ public class UserDecks {
         Log.i(filename, newDeck.toString());
     }
 
-    public void add(Deck newDeck) {
+    public void add(Deck newDeck){
         this.decks.add(newDeck);
+        //this.writeDeck(newDeck);
     }
+/*
+    public void writeDeck(Deck deck){
+        ICsvBeanWriter beanWriter = null;
+        Log.i("writeDeck", "Save the deck in dir: " + context.getFilesDir());
+        try {
 
-    public void writeDecksToFiles(AssetManager assetManager) {
-        this.assetManager = assetManager;
+            File file = new File((context.getFilesDir().getName() + "/decks"), (deck.getName() + ".csv"));
+            beanWriter = new CsvBeanWriter(new FileWriter(file),
+                    CsvPreference.STANDARD_PREFERENCE);
 
+            // the header elements are used to map the bean values to each column (names must match)
+            final String[] header = new String[] {"question", "answer", "priority", "count"};
+            final CellProcessor[] processors = new CellProcessor[]{new NotNull(),new NotNull(), new ParseInt(), new ParseInt()};
+
+            // write the header
+            beanWriter.writeHeader(header);
+
+            // write the beans
+            for (final Card card : deck.getCards()) {
+                beanWriter.write(card, header, processors);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(beanWriter != null) {
+                try {
+                    beanWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }*/
+
+    public void writeDecksToFiles(Context context) {
+        Log.i("writeDecksToFiles", "In writeDecksToFiles method");
         try {
             String[] filelist = assetManager.list("decks");
             if (filelist == null) {
@@ -103,9 +162,13 @@ public class UserDecks {
 
                     } else {
                         //save deck and its cards
+
+                        Log.i("writeDecksToFiles", "Save the decks and its cards. Directory: " + context.getFilesDir());
                         ICsvBeanWriter beanWriter = null;
                         try {
-                            beanWriter = new CsvBeanWriter(new FileWriter("decks/" + newFileName),
+
+                            File file = new File(context.getFilesDir().getName() + "/decks", newFileName);
+                            beanWriter = new CsvBeanWriter(new FileWriter(file),
                                     CsvPreference.STANDARD_PREFERENCE);
 
                             // the header elements are used to map the bean values to each column (names must match)
