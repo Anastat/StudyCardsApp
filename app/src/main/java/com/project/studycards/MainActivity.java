@@ -6,9 +6,12 @@ import android.content.res.AssetManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 
 import com.project.studycards.model.Deck;
@@ -69,10 +72,12 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
 
     //create new button with deck name
     private void createBtn (Deck deck) {
-        Button btnNew = new Button(this);
+       // Button btnNew = new Button(this);
+        View btnView=getLayoutInflater().inflate(R.layout.studydeckbutton,null);
+        Button btnNew=btnView.findViewById(R.id.decknamebtn);
         btnNew.setText(deck.getName());
         btnNew.setOnClickListener(new DeckClickListener(deck));
-        mainTableLayout.addView(btnNew);
+        mainTableLayout.addView(btnView);
     }
 
     //OnClickListener for starting new activity with given deck
