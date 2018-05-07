@@ -42,7 +42,6 @@
         android:padding="20sp"
         android:background="@drawable/studydeckbuttonstyle"
         android:text="Test mode"
-        android:fontFamily="@android:font"
         android:textColor="@android:color/background_light"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
