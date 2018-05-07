@@ -1,3 +1,4 @@
+"question","answer","priority","count"
 "What are block devices generally used for?","Block devices are used to store or hold data.","1","0"
 "Where do block devices reside?","/dev/","1","0"
 "What do character devices do?","Character devices are devices that transmit or transfer data.","1","0"
