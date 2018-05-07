@@ -3,11 +3,13 @@ package com.project.studycards;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TableLayout;
 
@@ -72,7 +74,9 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
     private void createBtn (Deck deck) {
         Button btnNew = new Button(this);
         btnNew.setText(deck.getName());
+        btnNew.setBackgroundResource(R.drawable.border_style);
         btnNew.setOnClickListener(new DeckClickListener(deck));
+
         mainTableLayout.addView(btnNew);
     }
 

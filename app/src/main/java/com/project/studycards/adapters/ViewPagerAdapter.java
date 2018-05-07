@@ -40,6 +40,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         TextView viewQuestion;
         TextView viewAnswer;
 
+
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View cardView = inflater.inflate(R.layout.learning_mode_layout, container, false);
 

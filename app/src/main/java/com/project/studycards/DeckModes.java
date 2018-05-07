@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,18 +17,27 @@ import com.project.studycards.fragments.DeckNameDialogFragment;
 import com.project.studycards.model.Deck;
 import com.project.studycards.model.Card;
 
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class DeckModes extends AppCompatActivity implements AddCardDialogFragment.AddCardDialogListener{
 
     private FloatingActionButton btnAddNewCard;
     private Button btnLearningMode;
     private Button btnTestMode;
     private Deck currentDeck;
+    private AssetManager assetManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deckmodes);
+
 
         //button for adding new card in deck
         btnAddNewCard = (FloatingActionButton) findViewById(R.id.btnAddNewCard);
@@ -44,8 +54,9 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
         //set clicked deck from MainActivity to current deck
         Intent intent = getIntent();
         currentDeck = (Deck) intent.getParcelableExtra(MainActivity.key);
+        assetManager = getAssets();
         Log.w("You clicked deck", currentDeck.toString());
-
+        setTitle(currentDeck.getName());
     }
 
     private View.OnClickListener startLearningMode = new View.OnClickListener() {
@@ -117,4 +128,5 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
             this.currentDeck = (Deck) data.getParcelableExtra(MainActivity.key);
         }
     }
+    
 }

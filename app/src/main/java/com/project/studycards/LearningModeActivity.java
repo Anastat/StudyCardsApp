@@ -24,7 +24,7 @@ public class LearningModeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         deck = (Deck) intent.getParcelableExtra(MainActivity.key);
         Collections.sort(deck.getCards());
-
+        setTitle(deck.getName());
         viewPager = (ViewPager)findViewById(R.id.pager);
         //pass results to ViewPagerAdapter Class
         adapter = new ViewPagerAdapter(LearningModeActivity.this, deck);
