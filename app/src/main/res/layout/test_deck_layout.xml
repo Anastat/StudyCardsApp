@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/testModeLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FF272F42">
 
 
     <TextView
@@ -22,7 +23,7 @@
         android:gravity="center"
         android:padding="15dp"
         android:text="TextView"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +44,7 @@
         android:gravity="center"
         android:padding="15dp"
         android:text="TextView"
-        android:textColor="#000000"
+        android:textColor="#FFC34627"
         android:textSize="20dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btnShowAnswer"
@@ -81,7 +82,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:hint="Type your answer"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="#FFC34627" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -95,7 +97,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/showanswerbuttonstyle"
         android:text="Show answer"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -115,7 +117,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/studydeckbuttonstyle"
         android:text="Next card"
         android:textColor="#FFFFFF"
         android:visibility="gone"
@@ -136,6 +138,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
