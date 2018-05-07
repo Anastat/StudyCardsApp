@@ -1,3 +1,4 @@
+"question","answer","priority","count"
 "Show system and kernel","uname -a","1","0"
 "Show distribution","head -nl /etc/issue","1","0"
 "Show system date","date","1","0"

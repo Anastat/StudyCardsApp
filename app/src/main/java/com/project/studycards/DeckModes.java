@@ -12,9 +12,19 @@ import android.view.View;
 import android.widget.Button;
 
 import com.project.studycards.fragments.AddCardDialogFragment;
-import com.project.studycards.fragments.DeckNameDialogFragment;
 import com.project.studycards.model.Deck;
 import com.project.studycards.model.Card;
+
+import org.supercsv.cellprocessor.ParseInt;
+import org.supercsv.cellprocessor.constraint.NotNull;
+import org.supercsv.cellprocessor.ift.CellProcessor;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class DeckModes extends AppCompatActivity implements AddCardDialogFragment.AddCardDialogListener{
 
@@ -97,6 +107,42 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
         if (!question.isEmpty() && !answer.isEmpty()) {
             Card newCard = new Card(question, answer);
             currentDeck.addCard(newCard);
+            this.writeCard(newCard);
+        }
+    }
+
+    public void writeCard(Card card) {
+        ICsvBeanWriter beanWriter = null;
+        Log.i("writeCard", "Save the deck in dir: " + this.getApplicationContext().getFilesDir());
+        try {
+            String fileName = currentDeck.getName() + ".csv";
+            String path = this.getApplicationContext().getFilesDir() + "/decks";
+            File file = new File(path, fileName);
+            beanWriter = new CsvBeanWriter(new FileWriter(file, true),
+                    CsvPreference.STANDARD_PREFERENCE);
+
+            // the header elements are used to map the bean values to each column (names must match)
+            final String[] header = new String[] {"question", "answer", "priority", "count"};
+            final CellProcessor[] processors = new CellProcessor[]{new NotNull(),new NotNull(), new ParseInt(), new ParseInt()};
+
+            if (currentDeck.getCards().size() == 1) {
+                // write the header
+                beanWriter.writeHeader(header);
+            }
+
+            // write the beans
+            beanWriter.write(card, header, processors);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(beanWriter != null) {
+                try {
+                    beanWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
