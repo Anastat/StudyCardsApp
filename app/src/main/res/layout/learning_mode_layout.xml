@@ -24,7 +24,7 @@
             android:padding="15dp"
             android:text="TextView"
             android:textColor="@android:color/white"
-            android:textSize="20dp" />
+            android:textSize="25sp" />
 
         <View
             android:layout_width="match_parent"
@@ -44,6 +44,6 @@
             android:padding="15dp"
             android:text="TextView"
             android:textColor="#ffffff"
-            android:textSize="20dp" />
+            android:textSize="25sp" />
     </LinearLayout>
 </RelativeLayout>
