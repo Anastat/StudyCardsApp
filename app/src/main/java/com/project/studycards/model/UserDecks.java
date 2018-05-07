@@ -13,8 +13,10 @@ import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +48,7 @@ public class UserDecks {
                 for (int i=0; i<filelist.length; i++) {
                     // Get filename of file or directory
                     String filename = filelist[i];
-                    fromFileToList( filename);
+                    fromFileToList( filename, assetManager.open("decks/" + filename));
                 }
             }
 
@@ -54,7 +56,9 @@ public class UserDecks {
                 for (int i=0; i<userfiles.length; i++) {
                     // Get filename of file or directory
                     String filename = userfiles[i];
-                    fromFileToList( filename);
+                    File file = new File(context.getFilesDir()+"/decks", filename);
+                    FileInputStream in = new FileInputStream(file);
+                    fromFileToList( filename, in);
                 }
             }
         } catch (IOException e) {
@@ -67,19 +71,20 @@ public class UserDecks {
     }
 
     //save deck from file to List
-    private void fromFileToList  (String filename)throws IOException {
+    private void fromFileToList  (String filename, InputStream in)throws IOException {
         //create deck based on file name
         Deck newDeck = new Deck(filename.replaceFirst("[.][^.]+$", ""));
         decks.add(newDeck);
 
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(assetManager.open("decks/" + filename));
+            InputStreamReader inputStreamReader = new InputStreamReader(in);
             ICsvBeanReader csvBeanReader = new CsvBeanReader(inputStreamReader, CsvPreference.STANDARD_PREFERENCE);
-            String [] mapping = new String[]{"question", "answer", "priority", "count"};
+            //String [] mapping = new String[]{"question", "answer", "priority", "count"};
+            final String[] header = csvBeanReader.getHeader(true);
             final CellProcessor[] processors = new CellProcessor[]{new NotNull(),new NotNull(), new ParseInt(), new ParseInt()};
             Card card;
             //read rows from file and add card to deck list
-            while((card = csvBeanReader.read(Card.class, mapping, processors)) != null) {
+            while((card = csvBeanReader.read(Card.class, header, processors)) != null) {
                 newDeck.addCard(card);
             }
         } catch (IOException e) {

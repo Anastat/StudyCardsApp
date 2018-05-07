@@ -100,8 +100,10 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
             final String[] header = new String[] {"question", "answer", "priority", "count"};
             final CellProcessor[] processors = new CellProcessor[]{new NotNull(),new NotNull(), new ParseInt(), new ParseInt()};
 
-            // write the header
-            beanWriter.writeHeader(header);
+            if (currentDeck.getCards().size() == 1) {
+                // write the header
+                beanWriter.writeHeader(header);
+            }
 
             // write the beans
             beanWriter.write(card, header, processors);
