@@ -1,9 +1,7 @@
-package com.project.studycards.pagerAdapter;
+package com.project.studycards.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -13,10 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.project.studycards.R;
-import com.project.studycards.model.Card;
 import com.project.studycards.model.Deck;
 
-import java.util.List;
 //Adapter for learning mode activity
 public class ViewPagerAdapter extends PagerAdapter {
     Context context;

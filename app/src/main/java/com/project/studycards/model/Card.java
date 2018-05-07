@@ -31,10 +31,6 @@ public class Card implements Comparable<Card>, Serializable{
         return this.priority - o.priority;
     }
 
-    public void rightAnswersCount () {
-        count++;
-    }
-
     public String getQuestion() {
         return question;
     }
@@ -66,6 +62,8 @@ public class Card implements Comparable<Card>, Serializable{
     public void setCount(int count) {
         this.count = count;
     }
+
+    public void incrementCount () { count++;}
 
     public String toString () {
         return "Question: " + this.question + " Answer: " + this.answer;

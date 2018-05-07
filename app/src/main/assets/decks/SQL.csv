@@ -1,4 +1,4 @@
-"Query data in columns 'c1', 'c2' from a table 't'","SELECT c1, c2 FROM t","1","2"
+"Query data in columns 'c1', 'c2' from a table 't'","SELECT c1, c2 FROM t","1","0"
 "Selecting all rows and columns from a table 't'","SELECT * FROM t","1","0"
 "Selecting all records from a table 'EMPLOYEE' and displaying 'ID' column","SELECT ID FROM EMPLOYEE","1","0"
 "Selecting all records from a table 'EMPLOYEE' and displaying multiple columns 'ID' and 'NAME' separated by commas","SELECT ID, NAME FROM EMPLOYEE","1","0"

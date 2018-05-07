@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
 
     private FloatingActionButton btnAddNewDeck;
     private TableLayout mainTableLayout;
-    private Deck currentDeck;
     private UserDecks userDecks;
+    public static final String key = "deck";
 
     private View.OnClickListener addNewDeckOnClickListener = new View.OnClickListener() {
         @Override
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
             addNewDeckBtnClicked();
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
             //open new screen with deck modes
             Log.w("Deck ", deck.getName());
             Intent intent = new Intent(MainActivity.this, DeckModes.class);
-            intent.putExtra("deck", deck);//send clicked deck to DeckModes Activity
+            intent.putExtra(MainActivity.key, deck);//send clicked deck to DeckModes Activity
             startActivity(intent);
         }
     }
