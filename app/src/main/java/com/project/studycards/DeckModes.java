@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.project.studycards.fragments.AddCardDialogFragment;
-import com.project.studycards.fragments.DeckNameDialogFragment;
 import com.project.studycards.model.Deck;
 import com.project.studycards.model.Card;
 

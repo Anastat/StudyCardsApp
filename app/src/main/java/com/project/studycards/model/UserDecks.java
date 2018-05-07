@@ -24,7 +24,6 @@ import java.util.List;
 public class UserDecks {
 
     private List<Deck> decks;
-    private AssetManager assetManager;
     private Context context;
 
     public UserDecks () {
@@ -33,7 +32,6 @@ public class UserDecks {
 
     //get list of files from deck folder
     public void readDecksFromFiles (AssetManager assetManager, Context context) {
-        this.assetManager = assetManager;
         this.context = context;
 
         try {
@@ -79,7 +77,6 @@ public class UserDecks {
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(in);
             ICsvBeanReader csvBeanReader = new CsvBeanReader(inputStreamReader, CsvPreference.STANDARD_PREFERENCE);
-            //String [] mapping = new String[]{"question", "answer", "priority", "count"};
             final String[] header = csvBeanReader.getHeader(true);
             final CellProcessor[] processors = new CellProcessor[]{new NotNull(),new NotNull(), new ParseInt(), new ParseInt()};
             Card card;
@@ -101,7 +98,7 @@ public class UserDecks {
 
     public void writeDeck(Deck deck){
         ICsvBeanWriter beanWriter = null;
-        Log.i("writeDeck", "Save the deck in dir: " + context.getFilesDir());
+        Log.i("writeDeck", "Save the deck in dir: " + context.getFilesDir() + "/decks");
         try {
             String newFileName = deck.getName() + ".csv";
             String path = context.getFilesDir() + "/decks";
