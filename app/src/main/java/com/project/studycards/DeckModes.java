@@ -128,5 +128,5 @@ public class DeckModes extends AppCompatActivity implements AddCardDialogFragmen
             this.currentDeck = (Deck) data.getParcelableExtra(MainActivity.key);
         }
     }
-    
+
 }

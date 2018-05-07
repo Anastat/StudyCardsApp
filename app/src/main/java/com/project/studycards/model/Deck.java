@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Deck implements Parcelable {
 
     public Deck (String name) {
         this.name = name;
-        this.cards = new LinkedList<>();
+        this.cards = new ArrayList<>();
     }
 
     public void addCard (Card card) {
