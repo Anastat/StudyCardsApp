@@ -66,15 +66,6 @@ public class UserDecks {
         return decks;
     }
 
-    public boolean uniqueName(String deckName) {
-        for (Deck deck : decks) {
-            if (deck.getName().equals(deckName)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     //save deck from file to List
     private void fromFileToList  (String filename)throws IOException {
         //create deck based on file name
@@ -100,30 +91,18 @@ public class UserDecks {
 
     public void add(Deck newDeck){
         this.decks.add(newDeck);
-        //this.writeDeck(newDeck);
+        this.writeDeck(newDeck);
     }
-/*
+
     public void writeDeck(Deck deck){
         ICsvBeanWriter beanWriter = null;
         Log.i("writeDeck", "Save the deck in dir: " + context.getFilesDir());
         try {
-
-            File file = new File((context.getFilesDir().getName() + "/decks"), (deck.getName() + ".csv"));
+            String newFileName = deck.getName() + ".csv";
+            String path = context.getFilesDir() + "/decks";
+            File file = new File(path, newFileName);
             beanWriter = new CsvBeanWriter(new FileWriter(file),
                     CsvPreference.STANDARD_PREFERENCE);
-
-            // the header elements are used to map the bean values to each column (names must match)
-            final String[] header = new String[] {"question", "answer", "priority", "count"};
-            final CellProcessor[] processors = new CellProcessor[]{new NotNull(),new NotNull(), new ParseInt(), new ParseInt()};
-
-            // write the header
-            beanWriter.writeHeader(header);
-
-            // write the beans
-            for (final Card card : deck.getCards()) {
-                beanWriter.write(card, header, processors);
-            }
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -135,71 +114,5 @@ public class UserDecks {
                 }
             }
         }
-    }*/
-
-    public void writeDecksToFiles(Context context) {
-        Log.i("writeDecksToFiles", "In writeDecksToFiles method");
-        try {
-            String[] filelist = assetManager.list("decks");
-            if (filelist == null) {
-                // dir does not exist or is not a directory
-            } else {
-
-                for (Deck deck : decks) {
-                    //find out if file already exists
-                    String newFileName = deck.getName() + ".csv";
-                    boolean fileExists = false;
-
-                    for (int i=0; i<filelist.length; i++) {
-                        String filename = filelist[i];
-                        if (newFileName.equals(filename)) {
-                            fileExists = true;
-                        }
-                    }
-
-                    if (fileExists) {
-                        //if filename exists, go through cards, save new ones
-
-                    } else {
-                        //save deck and its cards
-
-                        Log.i("writeDecksToFiles", "Save the decks and its cards. Directory: " + context.getFilesDir());
-                        ICsvBeanWriter beanWriter = null;
-                        try {
-
-                            File file = new File(context.getFilesDir().getName() + "/decks", newFileName);
-                            beanWriter = new CsvBeanWriter(new FileWriter(file),
-                                    CsvPreference.STANDARD_PREFERENCE);
-
-                            // the header elements are used to map the bean values to each column (names must match)
-                            final String[] header = new String[] {"question", "answer", "priority", "count"};
-                            final CellProcessor[] processors = new CellProcessor[]{new NotNull(),new NotNull(), new ParseInt(), new ParseInt()};
-
-                            // write the header
-                            beanWriter.writeHeader(header);
-
-                            // write the beans
-                            for (final Card card : deck.getCards()) {
-                                beanWriter.write(card, header, processors);
-                            }
-
-                        } finally {
-                            if(beanWriter != null) {
-                                beanWriter.close();
-                            }
-                        }
-                    }
-
-                }
-
-
-            }
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
-
 }

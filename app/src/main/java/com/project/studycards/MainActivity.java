@@ -44,13 +44,6 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
         userDecks.readDecksFromFiles(assetManager, this.getApplicationContext()); //Fill UserDecks list with decks from files
         createDecksButtons();//take list of decks from UserDecks and create buttons with deck name on main screen
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        userDecks.writeDecksToFiles(this.getApplicationContext());
-
-    }
     
     private void addDecksDir() {
         File decksDir = new File(this.getApplicationContext().getFilesDir()+"/decks");
@@ -59,8 +52,7 @@ public class MainActivity extends AppCompatActivity implements DeckNameDialogFra
             // create empty directory
             if (decksDir.mkdirs()) {
                 Log.i("CreateDir","Decks dir created");
-            }
-            else {
+            } else {
                 Log.w("CreateDir","Unable to create decks dir!");
             }
         } else {
