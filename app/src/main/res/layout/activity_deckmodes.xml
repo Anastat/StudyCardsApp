@@ -4,20 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".DeckModes">
 
     <Button
         android:id="@+id/btnLearningMode"
-        android:layout_width="200dp"
-        android:layout_height="75dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorPrimary"
+        android:drawableLeft="@drawable/ic_studymode"
+        android:padding="20sp"
+        android:background="@drawable/studydeckbuttonstyle"
         android:text="Learning mode"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/btnTestMode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,15 +31,20 @@
 
     <Button
         android:id="@+id/btnTestMode"
-        android:layout_width="200dp"
-        android:layout_height="75dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="216dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:background="@color/colorPrimary"
+        android:drawableLeft="@drawable/ic_testmode"
+        android:padding="20sp"
+        android:background="@drawable/studydeckbuttonstyle"
         android:text="Test mode"
+        android:fontFamily="@android:font"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -50,7 +60,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:clickable="true"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.907"
@@ -58,4 +68,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.923"
         app:srcCompat="@android:drawable/ic_menu_add" />
+<<<<<<< HEAD
+
+    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+=======
+>>>>>>> f29914606ee3fdf36f4d4c3fd342aea6932cacf3
 </android.support.constraint.ConstraintLayout>
