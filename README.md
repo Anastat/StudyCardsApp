@@ -13,6 +13,9 @@ Master branch interface
 <p align="center">
   <img src="https://github.com/Anastat/StudyCardsApp/blob/master/images/Screenshot_1525696417.png" width="350"/>
   <img src="https://github.com/Anastat/StudyCardsApp/blob/master/images/Screenshot_1525696421.png" width="350"/>
+  <img src="https://github.com/Anastat/StudyCardsApp/blob/master/images/Screenshot_1525725491.png" width="250"/>
+  <img src="https://github.com/Anastat/StudyCardsApp/blob/master/images/Screenshot_1525725499.png" width="250"/>
+  <img src="https://github.com/Anastat/StudyCardsApp/blob/master/images/Screenshot_1525725504.png" width="250"/>
 </p>
 
 Test-branch interface
